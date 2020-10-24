@@ -1,0 +1,26 @@
+.container{
+    width: 300px;
+    padding: 40px;
+}
+.profil h1{
+    justify-content: left;
+    margin-bottom: 70px;
+    width: 70px;
+    height: 34px;
+    font-size: 40px;
+}
+.name{
+    font-size: 25px;
+}
+.name input{
+    height: 50px;
+    width: 476px;
+    font-size: 15px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #f1ecec;
+    background-color: white;
+}
+.btn2{
+    width: 476px;
+}

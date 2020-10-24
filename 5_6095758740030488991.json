@@ -1,0 +1,531 @@
+{
+	"info": {
+		"_postman_id": "94333676-b979-42d2-b801-863884f293ec",
+		"name": "Auth Svc",
+		"description": "Auth Service used by other services to get auth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-app-key",
+								"value": "Y2xpbmdAMDUxNzk3ODQtMDhmNi0xMWU5LWFhMDItMjFiZjQ2OWM3YzU4"
+							},
+							{
+								"key": "roleId",
+								"value": "23b97ce8-1944-11e9-9620-d5ae65e64e7e",
+								"description": "notEmpty: true, isIn: appRoles"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Farid Test",
+									"description": "notEmpty: true, isLength: { max: 128 }",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "62217654321",
+									"description": "optional: true, isNumeric: true, isLength: { min: 11, max: 14 }",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "farid-user-cling@mail.me",
+									"description": "notEmpty: true, isEmail: true, custom: emailExist",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "qwerty",
+									"description": "notEmpty: true, isLength: { min: 6, max: 32 }",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/auth/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						},
+						"description": "/auth/register\n====\nRegistration."
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-app-key",
+								"value": "U2FsdGVkX19YWTfvogMG0qQp5pdOn5CMhFBr1CHXvyRPnhVVcvM0Nr/S44qwWlOS"
+							},
+							{
+								"key": "ttl",
+								"value": "10",
+								"description": "optional: true, isInt: true, in minute"
+							},
+							{
+								"key": "Host",
+								"value": "dev.svcgateway.meteor.co.id",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "farid-user-cling@mail.me",
+									"description": "notEmpty: true, isEmail: true, custom: (checkUser ? false : 'checkUser')",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "qwerty",
+									"description": "notEmpty: true, isLength: { min: 6, max: 32 }, custom: checkPassword",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://139.59.195.66/auth/login",
+							"protocol": "http",
+							"host": [
+								"139",
+								"59",
+								"195",
+								"66"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "/auth/login\n====\nLogin."
+					},
+					"response": []
+				},
+				{
+					"name": "Login Social Media",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-app-key",
+								"value": "{{cling}}",
+								"type": "text"
+							},
+							{
+								"key": "ttl",
+								"value": "60",
+								"type": "text",
+								"description": "optional: true, isInt: true, in minute"
+							},
+							{
+								"key": "roleId",
+								"value": "23b97ce8-1944-11e9-9620-d5ae65e64e7e",
+								"type": "text",
+								"description": "notEmpty: true, isIn: appRoles"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "idToken",
+									"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNiYmQyOGVkYzNkMTBiOTI5ZjU3NWEyY2E2ODU0OWZjYTZkODg5OTMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vdGVzdC1iZjgxZiIsIm5hbWUiOiJGYXJpZCBSYW1hZGhhbiIsInBpY3R1cmUiOiJodHRwczovL2xoNS5nb29nbGV1c2VyY29udGVudC5jb20vLVBNWUxuNXZ1dlFnL0FBQUFBQUFBQUFJL0FBQUFBQUFBQy1FL2hxUzdKWnBTZFlNL3Bob3RvLmpwZyIsImF1ZCI6InRlc3QtYmY4MWYiLCJhdXRoX3RpbWUiOjE1NTA1NjAyNjEsInVzZXJfaWQiOiJxVFhLTnpJaGRJaFQ0NUN6NTZZcmN6dHhuNnQxIiwic3ViIjoicVRYS056SWhkSWhUNDVDejU2WXJjenR4bjZ0MSIsImlhdCI6MTU1MDU2MDI2MSwiZXhwIjoxNTUwNTYzODYxLCJlbWFpbCI6ImZhcmlkcmFtYWRoYW4zMkBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMzUwMjcwOTgwOTQ1NjEwNTc2MCJdLCJlbWFpbCI6WyJmYXJpZHJhbWFkaGFuMzJAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoiZ29vZ2xlLmNvbSJ9fQ.iiRk4jAdu-cxibp_ygMdtx_5UBVHfiffJl-VSOo1GNXvtY5Y7xi-f7GPOa_CbXDoce2Eq020EvNpEzXnzNCHu_Y3YrCfjxQl7Nn0bIAsPVnr38m2tJKdtdFEnkxc9bj9VIigAJ-FSAa8CDp2wqF3GDOvF31Fams3umYgLyDNirvBCWiqNWG1LAY1ccONZmlkQdPHuR62MkJGYXjykyFlQj_VqyEyPwX_nqi11704tRBN4imOM0ot4UqmhKLI2LkFNlNs20YgiQWXeBSo8oUnu4YgPHNtWcBiE1t9jkppeHTtvy3jPDuBZMOk9_xZwI0IjJdwtHFsaGhVRt983CKHAQ",
+									"description": "notEmpty: true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/auth/login-socmed",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"login-socmed"
+							]
+						},
+						"description": "Authenticate user using idToken from firebase"
+					},
+					"response": []
+				},
+				{
+					"name": "Login Social Media v2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-app-key",
+								"value": "{{cling}}",
+								"type": "text"
+							},
+							{
+								"key": "ttl",
+								"value": "60",
+								"type": "text",
+								"description": "optional: true, isInt: true, in minute"
+							},
+							{
+								"key": "roleId",
+								"value": "23b97ce8-1944-11e9-9620-d5ae65e64e7e",
+								"type": "text",
+								"description": "notEmpty: true, isIn: appRoles"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "idToken",
+									"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjNiYmQyOGVkYzNkMTBiOTI5ZjU3NWEyY2E2ODU0OWZjYTZkODg5OTMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vdGVzdC1iZjgxZiIsIm5hbWUiOiJGYXJpZCBSYW1hZGhhbiIsInBpY3R1cmUiOiJodHRwczovL2xoNS5nb29nbGV1c2VyY29udGVudC5jb20vLVBNWUxuNXZ1dlFnL0FBQUFBQUFBQUFJL0FBQUFBQUFBQy1FL2hxUzdKWnBTZFlNL3Bob3RvLmpwZyIsImF1ZCI6InRlc3QtYmY4MWYiLCJhdXRoX3RpbWUiOjE1NTA1NjAyNjEsInVzZXJfaWQiOiJxVFhLTnpJaGRJaFQ0NUN6NTZZcmN6dHhuNnQxIiwic3ViIjoicVRYS056SWhkSWhUNDVDejU2WXJjenR4bjZ0MSIsImlhdCI6MTU1MDU2MDI2MSwiZXhwIjoxNTUwNTYzODYxLCJlbWFpbCI6ImZhcmlkcmFtYWRoYW4zMkBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjExMzUwMjcwOTgwOTQ1NjEwNTc2MCJdLCJlbWFpbCI6WyJmYXJpZHJhbWFkaGFuMzJAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoiZ29vZ2xlLmNvbSJ9fQ.iiRk4jAdu-cxibp_ygMdtx_5UBVHfiffJl-VSOo1GNXvtY5Y7xi-f7GPOa_CbXDoce2Eq020EvNpEzXnzNCHu_Y3YrCfjxQl7Nn0bIAsPVnr38m2tJKdtdFEnkxc9bj9VIigAJ-FSAa8CDp2wqF3GDOvF31Fams3umYgLyDNirvBCWiqNWG1LAY1ccONZmlkQdPHuR62MkJGYXjykyFlQj_VqyEyPwX_nqi11704tRBN4imOM0ot4UqmhKLI2LkFNlNs20YgiQWXeBSo8oUnu4YgPHNtWcBiE1t9jkppeHTtvy3jPDuBZMOk9_xZwI0IjJdwtHFsaGhVRt983CKHAQ",
+									"description": "notEmpty: true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/auth/social-media-login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"social-media-login"
+							]
+						},
+						"description": "Authenticate user using idToken from firebase"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Auth User",
+			"item": [
+				{
+					"name": "Check Auth",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHAiOiJjbGluZyIsInJvbGVJZCI6IjIzYjk3Y2U4LTE5NDQtMTFlOS05NjIwLWQ1YWU2NWU2NGU3ZSIsInJvbGUiOiJVc2VyIiwiaWQiOiI4YzU0MzI0MC00ZWViLTExZTktOThiMy00MzE5Yzg2YmQ3NDYiLCJuYW1lIjoiUmFqYSBUZXN0IiwicGhvbmUiOiI2MjgxMTE1MDkyMDQiLCJlbWFpbCI6InJhamFAcmFqYS5tZSIsInBnU3ZjIjoibWlkdHJhbnMiLCJwZ0FjY1VzZXIiOiJhMjU5ZTM1Zi0yNDUzLTExZTktOTJlYy04NGVmMThlMDgxN2YiLCJleHAiOjE1NTM1ODExMTcsImlhdCI6MTU1MzU4MDUxN30.xZuu_Tz29z8xaqf7OcBx1AAPsizGFsDyvTQ9vCWDaGo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-app-key",
+								"value": "{{cling}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/auth-user/check",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth-user",
+								"check"
+							]
+						},
+						"description": "/auth/check\n====\nView user's authentication."
+					},
+					"response": []
+				},
+				{
+					"name": "View Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlSWQiOiIyM2I5N2NlNy0xOTQ0LTExZTktOTYyMC1kNWFlNjVlNjRlN2UiLCJyb2xlIjoiRm91bmRhdGlvbiIsImlkIjoiYTI1OWUzZTEtMjQ1My0xMWU5LTkyZWMtODRlZjE4ZTA4MTdmIiwibmFtZSI6Ik1ldGVvciBGb3VuZGF0aW9uIiwicGhvbmUiOiI2MjIxODc2NTQzMiIsImVtYWlsIjoiZm91bmRhdGlvbkBtYWlsLm1lIiwicGdTdmMiOiJtY3JlZGl0IiwicGdBY2NVc2VyIjoiYTI1OWUzNWYtMjQ1My0xMWU5LTkyZWMtODRlZjE4ZTA4MTdmIiwiZXhwIjoxNTUzMjQ2MTc4LCJpYXQiOjE1NTMyNDYxMTh9.hcStos3BZuuKMV9Obv1MIdwWi0RfX-x5-Q8SfcVrSMI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-app-key",
+								"value": "{{cling}}"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/auth-user/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth-user",
+								"profile"
+							]
+						},
+						"description": "/auth/profile\n====\nView my profile."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlSWQiOiIyM2I5N2NlNS0xOTQ0LTExZTktOTYyMC1kNWFlNjVlNjRlN2UiLCJyb2xlIjoiU3VwZXJhZG1pbiIsImlkIjoiYTI1OWUzNWYtMjQ1My0xMWU5LTkyZWMtODRlZjE4ZTA4MTdmIiwibmFtZSI6IkNMSU5HIFNBIiwicGhvbmUiOiI2MjIxNzY1NDMyMSIsImVtYWlsIjoiY2xpbmdAY2xpbmcuaWQiLCJwZ1N2YyI6Im1jcmVkaXQiLCJwZ0FjY1VzZXIiOiJhMjU5ZTM1Zi0yNDUzLTExZTktOTJlYy04NGVmMThlMDgxN2YiLCJleHAiOjE1NTMxMzYyMjUsImlhdCI6MTU1MzEzNTYyNX0.q2ecsKHNuCMm7PaDtncj5reBZx_2lxy7x2xTV3BwNIc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-app-key",
+								"value": "{{cling}}"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "CLING SuperAdmin",
+									"description": "notEmpty: true, isLength: { max: 128 }",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "cling@cling.id",
+									"description": "notEmpty: true, isEmail: true, custom: emailExist",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "62217654321",
+									"description": "notEmpty: true, isNumeric: true, isLength: { min: 11, max: 14 }",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "BSD City",
+									"description": "optional: true, isString: true",
+									"type": "text"
+								},
+								{
+									"key": "district_id",
+									"value": "1",
+									"description": "optional: true",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "city_id",
+									"value": "1",
+									"description": "optional: true",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "province_id",
+									"value": "1",
+									"description": "optional: true",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "country_id",
+									"value": "1",
+									"description": "optional: true",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "zip_id",
+									"value": "54321",
+									"description": "optional: true",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/auth-user/profile",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth-user",
+								"profile"
+							]
+						},
+						"description": "/auth/profile\n====\nUpdate my profile."
+					},
+					"response": []
+				},
+				{
+					"name": "Profile Picture",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBJZCI6IjA1MTc5Nzg0LTA4ZjYtMTFlOS1hYTAyLTIxYmY0NjljN2M1OCIsInJvbGVJZCI6ImE2YmUwYzY4LTE3MzEtMTFlOS05NDAwLTdmZmNmYTU2N2JlNyIsImhpZXJhcmNoeSI6NCwiaWQiOiI5N2JhNzY4MC0xNzQ2LTExZTktOGVjYi0yZmJmOTQwOGM0M2QiLCJlbWFpbCI6ImZhcmlkQG1haWwubWUiLCJleHAiOjE1NDgyNDAwMTQsImlhdCI6MTU0ODIzNjQxNH0.PTxWiYqUW21YW5FaZKapUUcqH26fJeDERfstIq8_Zg8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-app-key",
+								"value": "{{cling}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "propic",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/auth-user/propic",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth-user",
+								"propic"
+							]
+						},
+						"description": "/auth/propic\n====\nUpdate profile picture."
+					},
+					"response": []
+				},
+				{
+					"name": "Change Password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlSWQiOiIyM2I5N2NlNS0xOTQ0LTExZTktOTYyMC1kNWFlNjVlNjRlN2UiLCJyb2xlIjoiU3VwZXJhZG1pbiIsImlkIjoiYTI1OWUzNWYtMjQ1My0xMWU5LTkyZWMtODRlZjE4ZTA4MTdmIiwibmFtZSI6IkNMSU5HIFNBIiwicGhvbmUiOiI2MjIxNzY1NDMyMSIsImVtYWlsIjoiY2xpbmdAY2xpbmcuaWQiLCJwZ1N2YyI6Im1jcmVkaXQiLCJwZ0FjY1VzZXIiOiJhMjU5ZTM1Zi0yNDUzLTExZTktOTJlYy04NGVmMThlMDgxN2YiLCJleHAiOjE1NTMxMzYyMjUsImlhdCI6MTU1MzEzNTYyNX0.q2ecsKHNuCMm7PaDtncj5reBZx_2lxy7x2xTV3BwNIc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-app-key",
+								"value": "{{cling}}"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "old_password",
+									"value": "Superadmin1234567",
+									"description": "notEmpty: true, isLength: { min: 6, max: 32 }, custom: checkPassword",
+									"type": "text"
+								},
+								{
+									"key": "new_password",
+									"value": "Superadmin1234567",
+									"description": "notEmpty: true, isLength: { min: 6, max: 32 }",
+									"type": "text"
+								},
+								{
+									"key": "confirmation_password",
+									"value": "Superadmin1234567",
+									"description": "notEmpty: true, isLength: { min: 6, max: 32 }, custom: confirmPassMatch",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/auth-user/change-pwd",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth-user",
+								"change-pwd"
+							]
+						},
+						"description": "/auth/change-pwd\n====\nChange password."
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "3e48d985-ec0d-4c6f-86b0-8b176ca8bdf1",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "c52f26b9-7759-4c2c-ad0b-f65de02815e0",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

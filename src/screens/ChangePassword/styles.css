@@ -1,0 +1,60 @@
+.container{
+    width: 380px;
+    padding: 40px;
+}
+.Cpassword h1{
+    margin: 15px;
+    justify-content: left;
+    margin-bottom: 70px;
+    width: 100px;
+    height: 30px;
+    font-size: 30px;
+}
+.Cpassword .boxPass label{
+    margin: 15px;
+    border-radius: 30px;
+    height: 15px;
+    font-size: 20px;
+}
+.Cpassword .boxPass input{
+    margin: 15px;
+    height: 35px;
+    width: 476px;
+    font-size: 14px;
+    border-bottom: 1px solid #B1B1B1;
+}
+.btn{
+    justify-content: center;
+    margin-top: 120px;
+    margin-left: 12px;
+    width: 478px;
+}
+.btn input{
+    height: 46px;
+    width: 576px;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 10px;
+    background-color: #297CF6;
+    text-transform: uppercase;
+    color: white;
+    border: none;
+}
+.Cpassword .password-icon{
+    position: absolute;
+    margin-left: 350px;
+    margin-top: 68px;
+    color: #B7B4B4;
+}
+.Cpassword .password-icon1{
+    position: absolute;
+    margin-left: 300px;
+    margin-top: 68px;
+    color: #B7B4B4;
+}
+.Cpassword .password-icon2{
+    position: absolute;
+    margin-left: 300px;
+    margin-top: 68px;
+    color: #B7B4B4;
+}
